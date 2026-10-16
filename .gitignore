@@ -1,0 +1,10 @@
+node_modules/
+dist/
+android/
+**/bin/
+**/obj/
+.vscode/
+.idea/
+
+# graphify-axet
+.graphify/

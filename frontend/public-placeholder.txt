@@ -1,0 +1,1 @@
+Placeholder only; Vite builds the React frontend into dist/.
