@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import './style.css';
+import PokerTimePage from './PokerTime.jsx';
 
 const DENOMS = [
   { value: 50, color: '#111827', text: '#ffffff' },
@@ -17,7 +18,7 @@ function stackQuality(cpd) {
   if (cpd < 8)  return { level: 'warn', icon: '~', text: 'Fichas limitadas. Ok para partidas rapidas, pode apertar no troco com blinds progressivos.' };
   if (cpd < 12) return { level: 'ok',   icon: 'v', text: 'Suficiente para algumas horas. Para jogos longos, o ideal e 12+ fichas de cada.' };
   if (cpd < 16) return { level: 'good', icon: 'v', text: 'Boa configuracao — confortavel para horas de jogo com blinds progressivos.' };
-  return           { level: 'great', icon: '*', text: cpd + ' fichas de cada — ideal para torneios longos com cegos crescentes a cada 30 min.' };
+  return { level: 'great', icon: '*', text: cpd + ' fichas de cada — ideal para torneios longos com cegos crescentes a cada 30 min.' };
 }
 
 let uid = 1;
@@ -262,12 +263,18 @@ function App() {
       <div style={{ display: tab === 'calc' ? 'block' : 'none' }}>
         <CalcPage kits={kits} setKits={setKits} players={players} setPlayers={setPlayers} rebuys={rebuys} setRebuys={setRebuys} buyIn={buyIn} setBuyIn={setBuyIn} />
       </div>
+      <div style={{ display: tab === 'timer' ? 'block' : 'none' }}>
+        <PokerTimePage sharedStackValue={stackValue} />
+      </div>
       <div style={{ display: tab === 'cashout' ? 'block' : 'none' }}>
         <CashoutPage sharedBuyIn={buyIn} sharedStackValue={stackValue} />
       </div>
       <nav className="tab-bar">
         <button className={tab === 'calc' ? 'active' : ''} onClick={() => setTab('calc')}>
-          <span>♠</span> Calculadora
+          <span>&#9824;</span> Calculadora
+        </button>
+        <button className={tab === 'timer' ? 'active' : ''} onClick={() => setTab('timer')}>
+          <span>&#9200;</span> Poker Time
         </button>
         <button className={tab === 'cashout' ? 'active' : ''} onClick={() => setTab('cashout')}>
           <span>$</span> Acerto
